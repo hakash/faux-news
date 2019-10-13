@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head th:replace="fragments/header :: html_header">
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title th:text="'Faux News - Where Truth Is Optional'">Home Template</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+		<link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}" />
+		<script src="../static/js/blog.js" th:src="@{/js/blog.js}"></script>
+	</head>
+    <body th:style="${#authorization.expression('isAuthenticated()')} == false ? '--userdetails-height:0px; --nav-height: var(--toolbar-height);'">
+        <div class="header" th:replace="fragments/header :: header">
+            <nav>
+                <img id="logo" src="https://picsum.photos/200/75">
+                <div id="toolbar">
+                    <ul>
+                        <li class="menu-item"><a href="/" class="menu-button">Home</a></li>
+                        <li class="menu-item"><a href="/about" class="menu-button">About</a></li>
+                        <li class="menu-item"><a href="/login" class="menu-button">Log In</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div id="main-container" th:if="${heroArticle}">
+            <div th:replace="fragments/article_card :: articleCardHero(article = ${heroArticle})">Hero article</div>
+            <section class="cards">
+                <div th:each="article: ${articlesWithImages}" th:remove="tag">
+                    <div th:replace="fragments/article_card :: articleCardWithImage(article = ${article})">sdfsdfsfsf</div>
+                </div>
+            </section>
+            <div id="right-container" style="max-width: 225px;">
+                <h3>Notices:</h3>
+                <div th:each="notice: ${notices}" th:remove="tag">
+                    <div th:replace="fragments/article_card :: articleCardSmall(article = ${notice})">minicard</div>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${heroArticle}" th:remove="tag">
+	       	<div id="main-container" th:replace="fragments/no_content :: no_content(title = 'Welcome!')">
+	        	No content
+	       	</div>
+        </div>
+        <div th:replace="fragments/footer :: footer">Footer</div>
+    </body>
+</html>
