@@ -168,6 +168,10 @@ pre code {
 	display: inline-block;
 }
 
+.card-with-image img {
+	width:100%;
+}
+
 .card-with-image h2 {
 	font-size: 2em;
 }
@@ -262,14 +266,16 @@ pre code {
 
 .editor-textarea {
 	padding: 20px;
+	font-size: 1em;
+	line-height: 1em;
 }
 
 #article_ingress_textarea {
-	height: 200px;
+	*height: 200px;
 }
 
 #article_body_textarea {
-	height: 500px;
+	*height: 500px;
 }
 
 .editor-button {
@@ -300,6 +306,58 @@ pre code {
 
 .preview-area p:first-child {
 	margin: 0px;
+}
+
+/**
+*	Login styles
+*/
+
+.login-form {
+	max-width: 500px;
+	width: 500pX;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.login-component {
+	margin-top: 30px;
+}
+
+.login-control {
+	margin-top: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 7px;
+	padding: 10px 15px;
+	font-size: 1em;
+	line-height: 1em;
+	width: 100%;
+}
+
+.login-button {
+	background: #33aa33;
+	color: white;
+	font-weight: bold;
+	letter-spacing: 2px;
+	font-size: 1.5em;
+	padding: 10px 5px;
+}
+
+.login-button:hover {
+	cursor: pointer;
+	box-shadow: inset 0px 0px 7px 2px rgba(0, 100, 0, 0.7);
+}
+
+.login-button:focus {
+	outline: none;
+}
+
+.login-error {
+	color: #660000;
+	padding: 5px;
+	border: 1px solid #cc6666;
+	background: #ffcccc;
+	text-align: center;
+	border-radius: 4px;
 }
 
 /**
@@ -340,14 +398,28 @@ nav {
 	margin-right: 10px;
 }
 
-#toolbar .menu-item a {
+#toolbar .menu-item .menu-link {
 	text-decoration: none;
+	font-style: italic;
+	cursor: pointer;
 	color: #f4efec;
 }
 
-#toolbar .menu-item a:hover {
+#toolbar .menu-item .menu-link:hover {
 	border-bottom: 7px solid #d4cfcc;
 	padding-bottom: 5px;
+}
+
+#toolbar .menu-button {
+	color: #f4efec;
+	border: 0px;
+	font: inherit;
+	background:inherit;
+	padding:0px;
+}
+
+.menu-button:focus, .menu-button:active {
+	outline: none;
 }
 
 #loggedInUserInfoBar {

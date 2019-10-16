@@ -21,7 +21,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 public class Article {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(nullable = true, unique = true)

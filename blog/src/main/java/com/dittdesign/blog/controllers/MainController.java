@@ -13,7 +13,7 @@ import com.dittdesign.blog.models.Article;
 import com.dittdesign.blog.models.ArticleRepository;
 
 @Controller
-public class HomeController {
+public class MainController {
 	
 	@Autowired
 	private ArticleRepository repo;
@@ -36,4 +36,8 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("/about")
+	String about() {
+		return "about";
+	}
 }

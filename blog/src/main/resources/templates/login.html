@@ -26,10 +26,30 @@
                 </div>
             </nav>
         </div>
-        <div id="main-container" th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
-	        <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
-	        <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
-	        <a href="/" th:href="@{/}">Back to Home Page</a>
+        <div id="main-container">
+	        <form th:action="@{/login}" method="post" class="login-form">
+		        <h1>Login</h1>
+		        <div class="login-error" th:if="${loginError}">Invalid username or password.</div>
+				<div class="login-component">
+					<label class="label label-block" for="login_username_textinput">Username:</label>
+					<input type="text"
+						   placeholder="i.e. CommanderKeen1337"
+						   class="login-control login-textinput"
+						   name="username"
+						   id="login_username_textinput">
+				</div>
+				<div class="login-component">
+					<label class="label label-block" for="login_password_passwordinput">Password:</label>
+					<input type="password"
+						   placeholder="********"
+						   class="login-control login-textinput"
+						   name="password"
+						   id="login_password_passwordinput">
+				</div>
+				<div class="login-component">
+					<button class="login-control login-button" type="submit">Log In!</button>
+				</div>
+	        </form>
 	    </div>
         <div th:replace="fragments/footer :: footer">Footer</div>
     </body>

@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}" />
 	</head>
-	<body>
+	<body th:style="${#authorization.expression('isAuthenticated()')} == false ? '--userdetails-height:0px; --nav-height: var(--toolbar-height);'">
 		<div class="header" th:replace="fragments/header :: header">
             <nav>
                 <img id="logo" src="https://picsum.photos/200/75">

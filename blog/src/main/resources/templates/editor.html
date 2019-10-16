@@ -32,8 +32,8 @@
 				<input type="hidden" th:if="${article}" th:value="${article?.id}" name="id" id="article_id_hidden">
 				<input type="hidden" th:if="${article}" th:value="${article?.author}" name="author" id="article_author_hidden">
 				<div class="editor-component" th:if="${article}">
-					<span class="label">Original Author: </span>
-					<span th:text="${article.author}"></span>
+					<span class="label">Original Author: <span th:text="${article.author}"></span></span>
+					
 				</div>
 				<div class="editor-component">
 					<label class="label label-block" for="article_title_input">Title:</label>
@@ -79,6 +79,7 @@
 				<div class="editor-component">
 					<label class="label label-block" for="article_ingress_textarea">Ingress:</label>
 					<textarea class="editor-control editor-textarea"
+							  rows="1"
 							  placeholder="Write your ingress here..."
 							  name="ingress"
 							  id="article_ingress_textarea"
@@ -87,6 +88,7 @@
 				<div class="editor-component">
 					<label class="label label-block" for="article_body_textarea">Body:</label>
 					<textarea class="editor-control editor-textarea"
+							  rows="1"
 							  placeholder="Write your main content here with Markdown formatting."
 							  name="body"
 							  id="article_body_textarea" 
