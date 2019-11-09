@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head th:replace="fragments/header :: html_header">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}" />
+	</head>
+	<body th:style="${#authorization.expression('isAuthenticated()')} == false ? '--userdetails-height:0px; --nav-height: var(--toolbar-height);'">
+		<div class="header" th:replace="fragments/header :: header">
+            <nav>
+                <img id="logo" src="https://picsum.photos/200/75">
+                <div id="toolbar">
+                    <ul>
+                        <li class="menu-item"><a href="/" class="menu-button">Home</a></li>
+                        <li class="menu-item"><a href="/contact" class="menu-button">Contact Us</a></li>
+                        <li class="menu-item"><a href="/login" class="menu-button">Log In</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div id="main-container">
+	        <h1>Oh my!</h1>
+	        <p>
+	        	It seems you were blocked from accessing the resource your browser navigated to. Please ensure you have the correct
+	        	permissions needed to access that content.
+	        </p>
+	        <p>
+	        	If you came here by accident, clicking some button you were curious about or perhaps followed a link someone gave you,
+	        	don't worry. Navigation mistakes happen to us all.
+	       	</p>
+	       	<p>
+	       		To go back to where you were you can <a href="javascript:history.back()">click here</a> or use the browsers back button.
+	       	</p>
+	       	<p>
+	       		Or you can just head on over to the front page <a href="/">here</a>.
+	       	</p>
+		</div>
+        <div th:replace="fragments/footer :: footer">Footer</div>
+	</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head th:replace="fragments/header :: html_header">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+		<script src="../static/js/blog.js"></script>
+	</head>
+	<body th:style="${#authorization.expression('isAuthenticated()')} == false ? '--userdetails-height:0px; --nav-height: var(--toolbar-height);'">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+		<script src="../../static/editor.js" th:src="@{/js/editor.js}"></script>
+		<div class="header" th:replace="fragments/header :: header">
+            <nav>
+                <img id="logo" src="https://picsum.photos/200/75">
+                <div id="toolbar">
+                    <ul>
+                        <li class="menu-item"><a href="/" class="menu-button">Home</a></li>
+                        <li class="menu-item"><a href="/contact" class="menu-button">Contact Us</a></li>
+                        <li class="menu-item"><a href="/login" class="menu-button">Log In</a></li>
+                    </ul>
+                </div>
+            </nav>
+		</div>
+		<div id="main-container">
+			<h1 class="editor-title" th:if="${article}">Edit Article</h1>
+			<h1 class="editor-title" th:unless="${article}">Create New Article</h1>
+			<form class="editor-form" th:action="@{/editor}" action="#" method="post" autocomplete="off">
+				<input type="hidden" th:if="${article}" th:value="${article?.id}" name="id" id="article_id_hidden">
+				<input type="hidden" th:if="${article}" th:value="${article?.author}" name="author" id="article_author_hidden">
+				<div class="editor-component" th:if="${article}">
+					<span class="label">Original Author: <span th:text="${article.author}"></span></span>
+					
+				</div>
+				<div class="editor-component">
+					<label class="label label-block" for="article_title_input">Title:</label>
+					<input type="text"
+						   aria-autocomplete="none"
+						   placeholder="The headline title of the article"
+						   class="editor-control editor-textinput"
+						   name="title"
+						   id="article_title_input"
+						   th:value="${article?.title}">
+				</div>
+				<div class="editor-component">
+					<label class="label label-block" for="article_catchline_input">Catchline:</label>
+					<input type="text"
+						   placeholder="A catch-frase or click-bait text for the front page"
+						   class="editor-control editor-textinput"
+						   name="catchline"
+						   id="article_catchline_input"
+						   th:value="${article?.catchline}">
+				</div>
+				<div class="editor-component">
+					<label class="label label-block" for="article_imageurl_input">Image URL:</label>
+					<input type="text"
+						   placeholder="The URL of the image you would like to headline the article."
+						   class="editor-control editor-textinput"
+						   name="imageUrl"
+						   id="article_imageurl_input"
+						   th:value="${article?.imageUrl}">
+				</div>
+				<div class="editor-component">
+					<label class="label label-block" for="article_alttext_input">Alternative Text:</label>
+					<input type="text"
+						   placeholder="The alternative text for the image"
+						   class="editor-control editor-textinput"
+						   name="altText"
+						   id="article_alttext_input"
+						   th:value="${article?.altText}">
+				</div>
+				<div class="editor-component">
+					<label class="label" for="article_type--article"><input type="radio" name="type" id="article_type--article" checked="checked" value="article" th:checked="${article == null || article?.type == 'article'}"> Article</label>
+					<label class="label" for="article_type--notice"><input type="radio" name="type" id="article_type--notice" value="notice" th:checked="${article?.type} == 'notice'"> Notice</label>
+				</div>
+				<div class="editor-component">
+					<label class="label label-block" for="article_ingress_textarea">Ingress:</label>
+					<textarea class="editor-control editor-textarea"
+							  rows="1"
+							  placeholder="Write your ingress here..."
+							  name="ingress"
+							  id="article_ingress_textarea"
+							  th:text="${article?.ingress}"></textarea>
+				</div>
+				<div class="editor-component">
+					<label class="label label-block" for="article_body_textarea">Body:</label>
+					<textarea class="editor-control editor-textarea"
+							  rows="1"
+							  placeholder="Write your main content here with Markdown formatting."
+							  name="body"
+							  id="article_body_textarea" 
+							  th:text="${article?.body}"></textarea>
+				</div>
+				<div class="editor-component">
+					<label class="label label-block">Preview of your body:</label>
+					<div class="preview-area" id="preview-body"></div>
+				</div>
+				<h2>Done?</h2>
+				<p>
+					When you are happy with the article, just hit the button below to publish it.
+				</p>
+				<button class="editor-control editor-button" type="submit" th:text="${article} == null ? 'Publish!' : 'Save Changes'">Publish!</button>
+			</form>
+		</div>
+		<div th:replace="fragments/footer :: footer">Footer</div>
+	</body>
+</html>

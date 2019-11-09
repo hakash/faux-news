@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head th:replace="fragments/header :: html_header">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}" />
+	</head>
+	<body th:style="${#authorization.expression('isAuthenticated()')} == false ? '--userdetails-height:0px; --nav-height: var(--toolbar-height);'">
+		<div class="header" th:replace="fragments/header :: header">
+            <nav>
+                <img id="logo" src="https://picsum.photos/200/75">
+                <div id="toolbar">
+                    <ul>
+                        <li class="menu-item"><a href="/" class="menu-button">Home</a></li>
+                        <li class="menu-item"><a href="/contact" class="menu-button">Contact Us</a></li>
+                        <li class="menu-item"><a href="/login" class="menu-button">Log In</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div th:unless="${article}" th:remove="tag">
+			<div th:replace="fragments/no_content :: no_content(title = 'Oh my!')">
+				No content
+			</div>
+		</div>
+		<div id="main-content" th:if="${article}">
+			<main class="article-container">
+				<img
+					th:src="${article.imageUrl}"
+					th:alt="${article.altText}"
+					th:attr="title=${article.altText}"
+					src="https://picsum.photos/500/300"
+					alt="Oh look! An image!"
+				/>
+	
+				<h1 class="article-title" th:text="${article.title}">Title</h1>
+				<div class="article-byline">
+					<div>By: <span class="article-author" th:text="${article.author}">John Doe</span></div>
+					<div>Created: <span class="article-created" th:text="${#dates.format(article.created, 'dd.MM.yyyy HH:mm')}">01.01.1900 12:34:56</span></div>
+				</div>
+				<div class="article-edit-component" th:if="${#authentication.name}==${article.author} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+					<a th:href="'/editor/' + ${article?.id}" class="edit-article-link">Edit article</a>
+				</div>
+				<div class="article-ingress" th:text="${article.ingress}">Ingress</div>
+				<div class="article-body" th:utext="${article.getBodyAsHtml()}">Article Body</div>
+			</main>
+		</div>
+        <div th:replace="fragments/footer :: footer">Footer</div>
+	</body>
+</html>

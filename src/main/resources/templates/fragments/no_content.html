@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+			<title>Article card template</title>
+		<link rel="stylesheet" href="../../static/css/styles.css" th:href="${'/css/styles.css'}" />
+	</head>
+	<body>
+		<div id="main-container" th:fragment="no_content">
+        	<h1 class="header" th:text="${title}">Ooops!</h1>
+        	<p>
+        		There doesn't seem to be any content to show yet.
+        	</p>
+        	<p>
+        		Why don't you add a dazzling diary of single-handedly 
+        		ending political corruption, recount a captivating coupe d'etat in a first 
+        		person voice or perhaps a thought-provoking thesis on migratory patterns 
+        		of butterflies and <a href="https://xkcd.com/378/" target="_blank">how they 
+        		affect computing</a>?  
+        	</p>
+        	<p>
+        		What ever drives your imagination or your creative juices, you can unleash here.
+       		</p>
+       		<div class="link-large text-center">
+       			<a href="/editor">Click Here To Start Writing Now!</a>
+       		</div>
+        </div>
+	</body>
+</html>
+	
