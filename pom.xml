@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dittdesign</groupId>
-	<artifactId>blog</artifactId>
+	<artifactId>faux-news</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>blog</name>
-	<description>Blog</description>
+	<name>faux-news</name>
+	<description>faux-news</description>
 
 	<properties>
 		<java.version>11</java.version>
